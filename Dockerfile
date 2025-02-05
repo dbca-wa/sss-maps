@@ -46,7 +46,7 @@ COPY startup.sh /
 RUN chmod 755 /startup.sh
 
 # Install Python libs from requirements.txt.
-FROM builder_base_spatial_layer_monitor as python_libs_spatial_layer_monitor
+FROM builder_base_sss_maps as python_libs_sss_maps
 WORKDIR /app
 user oim 
 RUN virtualenv /app/venv
@@ -58,12 +58,12 @@ COPY python-cron ./
 RUN whoami
 RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt 
 
-COPY --chown=oim:oim spatial_layer_monitor spatial_layer_monitor
+COPY --chown=oim:oim sss_maps sss_maps
 #COPY --chown=oim:oim thermalimageprocessing thermalimageprocessing
 COPY --chown=oim:oim manage.py ./
 
 # Install the project (ensure that frontend projects have been built prior to this step).
-FROM python_libs_spatial_layer_monitor
+FROM python_libs_sss_maps
 COPY timezone /etc/timezone
 COPY gunicorn.ini ./
 
