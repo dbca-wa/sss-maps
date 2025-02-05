@@ -1,0 +1,15 @@
+{
+	"name": "SSS Maps Development",
+	"image": "ghcr.io/dbca-wa/docker_app_dev:sss-maps_dev_latest",
+	"remoteUser": "container",
+	"workspaceFolder": "/data/data/projects/sss_maps",
+	"mounts": ["type=bind,source=/data/,target=/data/",
+	           "type=bind,source=/data/data/containerhome/,target=/home/container/"
+	          ],	
+	"appPort": [ "7032:8080","9211:9211","9212:9212","9213:9213","9214:9214","9215:9215"],
+	"runArgs": ["--env-file","${localEnv:HOME}/vscode-env/sss-maps.env",
+		   "--hostname","sss-maps-dev"
+		   ],
+	"forwardPorts": [9211,9212,9213,9214,9215],
+	"initializeCommand" : "${localEnv:HOME}/docker-scripts-dev/windows_vbox/postgres_docker_load_2404.sh"
+}

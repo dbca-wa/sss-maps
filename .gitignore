@@ -1,0 +1,15 @@
+*.pyc
+config*.cfg
+DBCA_Districts_4326.gpkg
+DBCA_Districts_4326.7z
+thermal_image_processing.py.save
+thermal_image_processing_bkp.py
+venv
+spatial_layer_monitor/cache
+spatial_layer_monitor/logs/
+pending_imports/
+data_storage/
+thermal_downloads/
+spatial_layer_monitor/thermal_data_processing
+thermal_files_uploaded/
+logs/
