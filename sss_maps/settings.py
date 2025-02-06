@@ -26,7 +26,7 @@ import dj_database_url
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-PRIVATE_MEDIA_URL = '/private-media/'
+PRIVATE_MEDIA_URL = '/'
 PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private-media')
 
 # Project specific settings

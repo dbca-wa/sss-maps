@@ -1,7 +1,12 @@
+import os
+from pathlib import Path
 import uuid
 import base64
 import binascii
+from datetime import datetime
 from django.core.files.base import ContentFile
+from django.conf import settings
+
 
 
 def get_file_extension(file_name, decoded_file):
@@ -30,3 +35,13 @@ def get_content_file_from_base64(content, filename=None):
     
     content_file_obj = ContentFile(decoded_file, name=filename)
     return content_file_obj
+
+def get_file_path(file_name):
+    now = datetime.now()
+    time = now.strftime("%Y/%m/%d")
+    return 'api/download/{0}/{1}'.format(time, file_name)
+
+def check_pdf_file_exists(file_name):
+    file_path = get_file_path(file_name)
+    full_path = os.path.join(settings.PRIVATE_MEDIA_ROOT, file_path)
+    return os.path.exists(full_path)
