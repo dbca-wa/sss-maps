@@ -8,8 +8,8 @@ import subprocess
 from django.core.management import base
 from datetime import datetime
 # Local
-from spatial_layer_monitor import settings
-from spatial_layer_monitor.monitor_processor import MonitorProcessor
+from sss_maps import settings
+from sss_maps.monitor_processor import MonitorProcessor
 logger = logging.getLogger(__name__)
 
 

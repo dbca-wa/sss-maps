@@ -1,0 +1,32 @@
+import uuid
+import base64
+import binascii
+from django.core.files.base import ContentFile
+
+
+def get_file_extension(file_name, decoded_file):
+    import imghdr
+
+    extension = imghdr.what(file_name, decoded_file)
+    extension = "jpg" if extension == "jpeg" else extension
+    return extension
+
+def strip_b64_header(content):
+    if ';base64,' in content:
+        header, base64_data = content.split(';base64,')
+        return base64_data
+    return content
+
+def get_content_file_from_base64(content, filename=None):
+    base64_data = strip_b64_header(content)
+    try:
+        decoded_file = base64.b64decode(base64_data)
+    except (TypeError, binascii.Error):
+        raise Exception("Invalid File Exception")
+    if not filename:
+        uuid_name = str(uuid.uuid4())[:12]
+        file_extension = get_file_extension(uuid_name, decoded_file)
+        filename = "{}.{}".format(uuid_name, file_extension)
+    
+    content_file_obj = ContentFile(decoded_file, name=filename)
+    return content_file_obj

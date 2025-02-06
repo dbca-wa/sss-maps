@@ -3,25 +3,35 @@ import logging
 
 from django.http import JsonResponse
 from django.views import View
-from rest_framework import routers, serializers, viewsets
+from rest_framework import routers, serializers, viewsets, status
 from rest_framework.decorators import api_view, permission_classes
-from .permissions import IsInOfficersGroup
-from .tasks import run_check_all_layers
+from .permissions import IsUserAuthenticated
+from .utils import get_content_file_from_base64
+from .models import MapLinkedFile
+
+from .serializers import CreateMapLinkedFileSerializer
 
 logger = logging.getLogger(__name__)
 
 
 @api_view(['POST'])
-@permission_classes([IsInOfficersGroup])
-def mock_kmi_service(request):
-    logger.info(request.data)
-    logger.info(vars(request.POST))
-    return JsonResponse({'message': 'Success'}, status=200)
+@permission_classes([IsUserAuthenticated])
+def store_map_pdf(request):
     
-
-@api_view(['POST'])
-@permission_classes([IsInOfficersGroup])
-def run_batch_import(request):
-    x = threading.Thread(target=run_check_all_layers)
-    x.run()
-    return JsonResponse({'message': 'Success'}, status=200)
+    uploaded_file = request.POST.get("base64_file")
+    filename = request.POST.get("filename")
+    
+    if uploaded_file and filename:
+        
+        # if MapLinkedFile.objects.filter(filename=filename).exists():
+        #     return JsonResponse({"success": False, "message": "Filename already exists"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        content_file = get_content_file_from_base64(uploaded_file, filename=filename)
+        
+        if not content_file:
+            return JsonResponse({"success": False, "message": "Error processing the file"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        new_obj = MapLinkedFile.objects.create(file=content_file)
+        return JsonResponse({'success': True, 'message': 'Success', 'data': new_obj.file.url}, status=status.HTTP_201_CREATED)    
+    else:
+        return JsonResponse({"success": False, 'message': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)

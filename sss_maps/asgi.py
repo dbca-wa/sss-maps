@@ -15,7 +15,7 @@ from django.core import asgi
 
 
 # Set Django settings environment variable
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spatial_layer_monitor.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sss_maps.settings")
 
 # Create ASGI handler
 application = asgi.get_asgi_application()

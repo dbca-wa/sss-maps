@@ -59,7 +59,6 @@ RUN whoami
 RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt 
 
 COPY --chown=oim:oim sss_maps sss_maps
-#COPY --chown=oim:oim thermalimageprocessing thermalimageprocessing
 COPY --chown=oim:oim manage.py ./
 
 # Install the project (ensure that frontend projects have been built prior to this step).
