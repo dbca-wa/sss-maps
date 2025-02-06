@@ -1,4 +1,4 @@
-"""WSGI config for the Spatial Layer Monitor project.
+"""WSGI config for the SSS Maps project.
 
 It exposes the WSGI callable as a module-level variable named `application`.
 
@@ -15,7 +15,7 @@ from django.core import wsgi
 
 
 # Set Django settings environment variable
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spatial_layer_monitor.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sss_maps.settings")
 
 # Create WSGI handler
 application = wsgi.get_wsgi_application()

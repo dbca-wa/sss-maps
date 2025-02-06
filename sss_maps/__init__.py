@@ -1,4 +1,4 @@
-"""The Spatial Layer Monitor DBCA Django Project."""
+"""The SSS Maps DBCA Django Project."""
 import sys
 
 

@@ -14,11 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django import conf
 from django import urls
-from . import api as layerCacheService_views
+from . import api as sss_maps_api
 from . import views
 
 
@@ -30,9 +32,8 @@ admin.site.site_title = conf.settings.PROJECT_TITLE
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('run_batch_import/', layerCacheService_views.run_batch_import, name='run_batch_import'),
-    path('mock_kmi_service/', layerCacheService_views.mock_kmi_service, name='mock_kmi_service'),
-
-    urls.path('', views.AddSpatialLayerInfo.as_view(), name='home'),
-    
+    path('api/store_map_pdf/', sss_maps_api.store_map_pdf),    
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.PRIVATE_MEDIA_URL, document_root=settings.PRIVATE_MEDIA_ROOT)

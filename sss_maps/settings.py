@@ -26,9 +26,12 @@ import dj_database_url
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+PRIVATE_MEDIA_URL = '/'
+PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private-media')
+
 # Project specific settings
-PROJECT_TITLE = "Spatial Layer Monitor"
-PROJECT_DESCRIPTION = "DBCA System to monitor and report changes in spatial layers"
+PROJECT_TITLE = "SSS Maps"
+PROJECT_DESCRIPTION = "DBCA System to store and serve files"
 PROJECT_VERSION = "v1"
 
 # Quick-start development settings - unsuitable for production
@@ -54,7 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "webtemplate_dbca",
-    "spatial_layer_monitor",
+    "sss_maps",
     "rest_framework",
     "rest_framework_datatables",
     "drf_spectacular",
@@ -85,15 +88,15 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dbca_utils.middleware.SSOLoginMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "spatial_layer_monitor.middleware.CacheControl",
+    "sss_maps.middleware.CacheControl",
     'django.middleware.locale.LocaleMiddleware',
 ]
-ROOT_URLCONF = "spatial_layer_monitor.urls"
+ROOT_URLCONF = "sss_maps.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / "spatial_layer_monitor/templates",
+            BASE_DIR / "sss_maps/templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -102,12 +105,12 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "spatial_layer_monitor.context_processors.variables",
+                "sss_maps.context_processors.variables",
             ],
         },
     },
 ]
-WSGI_APPLICATION = "spatial_layer_monitor.wsgi.application"
+WSGI_APPLICATION = "sss_maps.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -142,7 +145,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    BASE_DIR / "spatial_layer_monitor/static",  # Look for static files in the frontend
+    BASE_DIR / "sss_maps/static",  # Look for static files in the frontend
     # BASE_DIR / "govapp/frontend/node_modules"  # node modules that are collected and used in the frontend
 ]
 
@@ -215,14 +218,14 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'spatial_layer_monitor.log'),
+            'filename': os.path.join(BASE_DIR, 'logs', 'sss_maps.log'),
             'formatter': 'verbose2',
             'maxBytes': 5242880
         },
         'file_for_sql': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'spatial_layer_monitor_sql.log'),
+            'filename': os.path.join(BASE_DIR, 'logs', 'sss_maps_sql.log'),
             'formatter': 'verbose2',
             'maxBytes': 5242880
         },
@@ -314,6 +317,4 @@ if not RUNNING_DEVSERVER and SENTRY_DSN and EMAIL_INSTANCE:
 
 
 
-SPATIAL_UPDATE_ENDPOINT = decouple.config("SPATIAL_UPDATE_ENDPOINT", default=None)
-SPATIAL_UPDATE_USERNAME = decouple.config("SPATIAL_UPDATE_USERNAME", default=None)
-SPATIAL_UPDATE_PASSWORD = decouple.config("SPATIAL_UPDATE_PASSWORD", default=None)
+BYPASS_AUTHENTICATION = decouple.config("BYPASS_AUTHENTICATION", default=False)

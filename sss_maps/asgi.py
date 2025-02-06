@@ -1,4 +1,4 @@
-"""ASGI config for the Spatial Layer Monitor project.
+"""ASGI config for the SSS Maps project.
 
 It exposes the ASGI callable as a module-level variable named `application`.
 
@@ -15,7 +15,7 @@ from django.core import asgi
 
 
 # Set Django settings environment variable
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spatial_layer_monitor.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sss_maps.settings")
 
 # Create ASGI handler
 application = asgi.get_asgi_application()

@@ -9,7 +9,7 @@ from django.core.cache import cache
 # Typing
 from typing import Any
 
-from spatial_layer_monitor import settings
+from sss_maps import settings
 
 
 def variables(request: http.HttpRequest) -> dict[str, Any]:
