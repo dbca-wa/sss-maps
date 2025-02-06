@@ -21,7 +21,6 @@ from django.urls import path, include
 from django import conf
 from django import urls
 from . import api as sss_maps_api
-from . import views
 
 
 admin.site.site_header = conf.settings.PROJECT_TITLE
