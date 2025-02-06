@@ -1,9 +1,10 @@
-from django.db.models import Q
 from django.conf import settings
 from django.db import models
 from django.core.files.storage import FileSystemStorage
 
 from .utils import get_file_path
+
+
 upload_storage = FileSystemStorage(location=settings.PRIVATE_MEDIA_ROOT)
 
 def upload_to_path(instance, filename):

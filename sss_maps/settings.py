@@ -30,8 +30,8 @@ PRIVATE_MEDIA_URL = '/'
 PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private-media')
 
 # Project specific settings
-PROJECT_TITLE = "Spatial Layer Monitor"
-PROJECT_DESCRIPTION = "DBCA System to monitor and report changes in spatial layers"
+PROJECT_TITLE = "SSS Maps"
+PROJECT_DESCRIPTION = "DBCA System to store and serve files"
 PROJECT_VERSION = "v1"
 
 # Quick-start development settings - unsuitable for production

@@ -1,1 +1,1 @@
-"""Spatial Layer Monitor Django Applications."""
+"""SSS Maps Django Applications."""

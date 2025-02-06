@@ -1,4 +1,4 @@
-"""WSGI config for the Spatial Layer Monitor project.
+"""WSGI config for the SSS Maps project.
 
 It exposes the WSGI callable as a module-level variable named `application`.
 

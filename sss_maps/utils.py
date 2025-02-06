@@ -35,7 +35,10 @@ def get_content_file_from_base64(content, filename=None):
     
     content_file_obj = ContentFile(decoded_file, name=filename)
     return content_file_obj
-
+'''
+    Utility function to get the path of the file to be stored.
+    Used at validation and at storing time.
+'''
 def get_file_path(file_name):
     now = datetime.now()
     time = now.strftime("%Y/%m/%d")

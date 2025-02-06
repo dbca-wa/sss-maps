@@ -1,4 +1,4 @@
-"""ASGI config for the Spatial Layer Monitor project.
+"""ASGI config for the SSS Maps project.
 
 It exposes the ASGI callable as a module-level variable named `application`.
 

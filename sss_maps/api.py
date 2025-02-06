@@ -1,15 +1,12 @@
-import threading
 import logging
 
 from django.http import JsonResponse
-from django.views import View
-from rest_framework import routers, serializers, viewsets, status
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
+
 from .permissions import IsUserAuthenticated
 from .utils import get_content_file_from_base64
 from .models import MapLinkedFile
-
-from .serializers import CreateMapLinkedFileSerializer
 from .utils import check_pdf_file_exists
 logger = logging.getLogger(__name__)
 
