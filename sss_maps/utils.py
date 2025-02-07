@@ -40,11 +40,9 @@ def get_content_file_from_base64(content, filename=None):
     Used at validation and at storing time.
 '''
 def get_file_path(file_name):
-    now = datetime.now()
-    time = now.strftime("%Y/%m/%d")
-    return 'api/download/{0}/{1}'.format(time, file_name)
+    return 'download/{0}'.format(file_name)
 
-def check_pdf_file_exists(file_name):
+def check_file_exists(file_name):
     file_path = get_file_path(file_name)
     full_path = os.path.join(settings.PRIVATE_MEDIA_ROOT, file_path)
     return os.path.exists(full_path)

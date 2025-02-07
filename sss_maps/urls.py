@@ -17,7 +17,8 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include,re_path
+
 from django import conf
 from django import urls
 from . import api as sss_maps_api
@@ -31,8 +32,7 @@ admin.site.site_title = conf.settings.PROJECT_TITLE
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/store_map_pdf/', sss_maps_api.store_map_pdf),    
+    path('api/store_map_pdf/', sss_maps_api.store_map_pdf),
+    re_path(r'^download/(?P<hash>\w+).(?P<extension>\w\w\w)$', sss_maps_api.get_file, name='get_file'),
+    re_path(r'^download/(?P<hash>\w+).(?P<extension>\w\w\w\w)$', sss_maps_api.get_file, name='get_file2'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.PRIVATE_MEDIA_URL, document_root=settings.PRIVATE_MEDIA_ROOT)
