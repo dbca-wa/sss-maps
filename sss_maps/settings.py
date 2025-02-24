@@ -266,8 +266,7 @@ PRODUCTION_EMAIL= decouple.config("PRODUCTION_EMAIL", default=False, cast=bool)
 EMAIL_DELIVERY = decouple.config("EMAIL_DELIVERY", default="off")
 
 # Group Settings
-GROUP_ADMIN = 'Admin'
-GROUP_OFFICERS = 'Officers'
+GROUP_OFFICERS = decouple.config("GROUP_OFFICERS", default='SSSMapsOfficers')
 
 # Cron Jobs
 # https://django-cron.readthedocs.io/en/latest/installation.html

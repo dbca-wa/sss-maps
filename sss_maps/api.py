@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponse
-from .permissions import IsUserAuthenticated
+from .permissions import IsOfficerUser
 from .utils import get_content_file_from_base64
 from .models import MapLinkedFile
 from .utils import check_file_exists
@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 @api_view(['POST'])
-@permission_classes([IsUserAuthenticated])
+@permission_classes([IsOfficerUser])
 def store_map_pdf(request):
     
     uploaded_file = request.POST.get("base64_file")
