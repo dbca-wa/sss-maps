@@ -60,6 +60,7 @@ RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=oim:oim sss_maps sss_maps
 COPY --chown=oim:oim manage.py ./
+RUN python manage.py collectstatic --noinput
 
 # Install the project (ensure that frontend projects have been built prior to this step).
 FROM python_libs_sss_maps
