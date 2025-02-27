@@ -3,7 +3,7 @@ import mimetypes
 
 from django.http import JsonResponse
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponse
 from .permissions import IsApiUser
@@ -13,8 +13,16 @@ from .utils import check_file_exists
 from django.views.decorators.csrf import csrf_exempt
 logger = logging.getLogger(__name__)
 
-@csrf_exempt
+from rest_framework.authentication import SessionAuthentication
+
+
+class SessionCsrfExemptAuthentication(SessionAuthentication):
+    def enforce_csrf(self, request):
+        pass
+
+
 @api_view(['POST'])
+@authentication_classes([SessionCsrfExemptAuthentication])
 @permission_classes([IsApiUser])
 def store_map_pdf(request):
     
