@@ -10,9 +10,10 @@ from .permissions import IsApiUser
 from .utils import get_content_file_from_base64
 from .models import MapLinkedFile
 from .utils import check_file_exists
+from django.views.decorators.csrf import csrf_exempt
 logger = logging.getLogger(__name__)
 
-
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([IsApiUser])
 def store_map_pdf(request):
