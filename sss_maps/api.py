@@ -10,7 +10,8 @@ from .permissions import IsApiUser
 from .utils import get_content_file_from_base64
 from .models import MapLinkedFile
 from .utils import check_file_exists
-from django.views.decorators.csrf import csrf_exempt
+from django.core.cache import cache
+
 logger = logging.getLogger(__name__)
 
 from rest_framework.authentication import SessionAuthentication
@@ -20,8 +21,6 @@ class SessionCsrfExemptAuthentication(SessionAuthentication):
     def enforce_csrf(self, request):
         pass
 
-
-from django.core.cache import cache
 
 @api_view(['POST'])
 @authentication_classes([SessionCsrfExemptAuthentication])
