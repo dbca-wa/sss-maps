@@ -84,5 +84,6 @@ def status(request):
     if total_map_files > 0:
         status = {"status": 200, "message" : "Success loading map count"}
 
-    return HttpResponse(status, content_type=mimetypes.types_map['.json'], status=status['status'])
+    return JsonResponse(status, status=status['status'])
+
 
