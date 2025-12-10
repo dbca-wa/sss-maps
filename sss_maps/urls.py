@@ -32,6 +32,7 @@ admin.site.site_title = conf.settings.PROJECT_TITLE
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/store_map_pdf/', sss_maps_api.store_map_pdf),
+    path('api/status.json', sss_maps_api.status),
     re_path(r'^download/(?P<hash>\w+).(?P<extension>\w\w\w)$', sss_maps_api.get_file, name='get_file'),
     re_path(r'^download/(?P<hash>\w+).(?P<extension>\w\w\w\w)$', sss_maps_api.get_file, name='get_file2'),
 ]
