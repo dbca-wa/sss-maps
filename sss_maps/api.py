@@ -74,4 +74,14 @@ def get_file(request, hash, extension):
     with open(file.path, 'rb') as f:
          file_data = f.read()
          f.close()
+
     return HttpResponse(file_data, content_type=mimetypes.types_map['.'+str(extension)])
+
+@api_view(['GET'])
+def status(request):
+    total_map_files = MapLinkedFile.objects.count()
+    resp = {"status" : 500, "message": "Error with map linked"}
+    if total_map_files > 0:
+        status = {"status": 200, "message" : "Success loading map count"}
+
+    return HttpResponse(status, content_type=mimetypes.types_map['.json'], status_code=status['status'])
