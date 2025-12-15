@@ -51,16 +51,16 @@ def store_map_pdf(request):
 
         filename = f"{hash_value}.{extension}"
         if MapLinkedFile.objects.filter(hash=hash_value).exists() or check_file_exists(filename):
-            return JsonResponse({"success": False, "message": "File hash already exists"}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"success": False, "message": "File hash already exists"}, status=404)
 
         content_file = get_content_file_from_base64(full_file, filename=filename)
         if not content_file:
-            return JsonResponse({"success": False, "message": "Error processing the file"}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"success": False, "message": "Error processing the file"}, status=400)
 
         new_obj = MapLinkedFile.objects.create(file=content_file, hash=hash_value, extension=extension)
-        return JsonResponse({'success': True, 'message': 'Success', 'data': new_obj.file.url}, status=status.HTTP_201_CREATED)
+        return JsonResponse({'success': True, 'message': 'Success', 'data': new_obj.file.url}, status=201)
     else:
-        return JsonResponse({"success": True, "message": "Chunk received, awaiting more chunks"}, status=status.HTTP_200_OK)
+        return JsonResponse({"success": True, "message": "Chunk received, awaiting more chunks"}, status=200)
 
 
 @api_view(['GET'])
@@ -82,8 +82,10 @@ def status(request):
     total_map_files = MapLinkedFile.objects.count()
     resp = {"status" : 500, "message": "Error with map linked"}
     if total_map_files > 0:
-        status = {"status": 200, "message" : "Success loading map count"}
+        resp = {"status": 200, "message" : "Success loading map count"}
 
-    return JsonResponse(status, status=status['status'])
+    return JsonResponse(resp, status=resp['status'])
+
+
 
 
