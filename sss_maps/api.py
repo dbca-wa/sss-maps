@@ -82,9 +82,10 @@ def status(request):
     total_map_files = MapLinkedFile.objects.count()
     resp = {"status" : 500, "message": "Error with map linked"}
     if total_map_files > 0:
-        status = {"status": 200, "message" : "Success loading map count"}
+        resp = {"status": 200, "message" : "Success loading map count"}
 
-    return JsonResponse(status, status=status['status'])
+    return JsonResponse(resp, status=resp['status'])
+
 
 
 
