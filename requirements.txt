@@ -5,7 +5,7 @@ postmarker==1.0
 azure-storage-blob==12.24.0
 pyinotify-elephant-fork==0.0.1
 psycopg2==2.9.10
-setuptools==80.7.1
+setuptools==80.9.0
 
 # Django Application Requirements
 Django~=5.2.0
@@ -34,7 +34,7 @@ owslib==0.29.2
 numpy==2.0.1
 git+https://github.com/dbca-wa/appmonitor_client.git#egg=appmonitor_client
 cryptography>=42.0.7
-pillow==10.3.0
+pillow==12.1.0
 pyjwt~=2.10.1
 urllib3~=2.6.0
 wheel==0.42.0
