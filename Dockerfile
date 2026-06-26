@@ -1,5 +1,5 @@
 # Prepare the base environment.
-FROM ghcr.io/dbca-wa/docker-apps-dev:ubuntu_2510_base_python AS builder_base_sss_maps
+FROM ghcr.io/dbca-wa/docker-apps-dev:ubuntu_2604_base_python AS builder_base_sss_maps
 MAINTAINER asi@dbca.wa.gov.au
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Australia/Perth
@@ -39,16 +39,17 @@ RUN chmod 755 /startup.sh
 # Install Python libs from requirements.txt.
 FROM builder_base_sss_maps as python_libs_sss_maps
 WORKDIR /app
-user oim 
-RUN virtualenv /app/venv
-ENV PATH=/app/venv/bin:$PATH
+USER oim
+ENV VIRTUAL_ENV=/app/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH=$VIRTUAL_ENV/bin:$PATH
 RUN git config --global --add safe.directory /app
 
 COPY requirements.txt ./
 COPY python-cron ./
 RUN whoami
-RUN /app/venv/bin/pip install --upgrade pip
-RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt 
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=oim:oim sss_maps sss_maps
 COPY --chown=oim:oim manage.py ./
