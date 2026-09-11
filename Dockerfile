@@ -25,7 +25,7 @@ RUN apt-get clean
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install --no-install-recommends -y python3-gunicorn
-RUN apt-get install --no-install-recommends -y ssh iputils-ping python3-azure
+#RUN apt-get install --no-install-recommends -y ssh iputils-ping python3-azure
 RUN apt-get install --no-install-recommends -y gdal-bin python3-gdal
 RUN apt-get install --no-install-recommends -y libgdal-dev build-essential p7zip-full
 
