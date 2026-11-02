@@ -4,7 +4,7 @@ SQLAlchemy==2.0.36
 postmarker==1.0
 azure-storage-blob==12.24.0
 pyinotify-elephant-fork==0.0.1
-psycopg2==2.9.10
+psycopg2==2.9.13
 setuptools==82.0.1
 
 # Django Application Requirements
