@@ -54,7 +54,7 @@ RUN git config --global --add safe.directory /app
 COPY requirements.txt ./
 COPY python-cron ./
 RUN whoami
-RUN uv pip install --no-cache-dir -r requirements.txt
+RUN uv pip install -r requirements.txt
 
 COPY --chown=oim:oim sss_maps sss_maps
 COPY --chown=oim:oim manage.py ./
