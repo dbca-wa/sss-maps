@@ -24,17 +24,16 @@ ENV FIELD_ENCRYPTION_KEY="Mv12YKHFm4WgTXMqvnoUUMZPpxx1ZnlFkfGzwactcdM="
 RUN apt-get clean
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install --no-install-recommends -y python3-gunicorn
+# RUN apt-get install --no-install-recommends -y python3-gunicorn
 #RUN apt-get install --no-install-recommends -y ssh iputils-ping python3-azure
-RUN apt-get install --no-install-recommends -y gdal-bin python3-gdal
-RUN apt-get install --no-install-recommends -y libgdal-dev build-essential p7zip-full
+# RUN apt-get install --no-install-recommends -y gdal-bin python3-gdal
+# RUN apt-get install --no-install-recommends -y libgdal-dev build-essential p7zip-full
+RUN apt-get install --no-install-recommends -y p7zip-full
 
 RUN groupadd -g 5000 oim 
 RUN useradd -g 5000 -u 5000 oim -s /bin/bash -d /app
 RUN mkdir /app 
 RUN chown -R oim.oim /app 
-
-RUN apt-get install --no-install-recommends -y python3-pil
 
 ENV TZ=Australia/Perth
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -46,8 +45,9 @@ RUN chmod 755 /startup.sh
 FROM builder_base_sss_maps as python_libs_sss_maps
 WORKDIR /app
 USER oim
+
 ENV VIRTUAL_ENV=/app/venv
-RUN python3 -m venv $VIRTUAL_ENV
+RUN python -m venv $VIRTUAL_ENV
 ENV PATH=$VIRTUAL_ENV/bin:$PATH
 RUN git config --global --add safe.directory /app
 
